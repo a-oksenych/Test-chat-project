@@ -2,9 +2,12 @@ apply plugin: 'java'
 
 repositories {
      maven { url 'http://artifacts.copyright.com/rup-ext' }
+     maven { url 'http://artifacts.copyright.com/repo1-cache' }
      ivy { url 'http://artifacts.copyright.com/rup-release' }
 }
 
 dependencies {
     compile('com.copyright.rup.works:works-workflow-camelcore:1.0.0') 
+    compile('org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1') 
+    compile('org.apache.activemq:activemq-core:5.6.0') 
 }

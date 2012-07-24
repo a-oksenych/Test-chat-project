@@ -14,9 +14,20 @@
 	</bean>
 	
 	<bean name="active.mq.service" class="com.epam.chat.service.ActiveMQService">
-	
-	
+		<property name="activeMQUrl" value="#{activemq.url}"/>
+		<property name="camelContext" ref="camelcore"/>
+		<property name="connectionFactory" ref="chat.component.factory"/>
+		<property name="routeFactory" ref="chat.route.factory"/>
 	</bean>
-
+	
+	<bean name="chat.component.factory" class="com.epam.chat.camel.JMSComponentFactory"/>
+	
+	<bean name="chat.message.cache" class="com.epam.chat.service.LocalMessageCache"/>
+	
+	<bean name="chat.route.factory" class="com.epam.chat.camel.ActiveMQRouteFactory"/>
+	
+	<bean name="chat.message.listener" class="com.epam.chat.camel.MessageListener" scope="prototype">
+		<property name="messageCache" ref="chat.message.cache"/>
+	</bean>
 
 </beans>
