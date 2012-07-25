@@ -1,1 +1,10 @@
 apply plugin: 'java'
+
+repositories {
+     maven { url 'http://artifacts.copyright.com/rup-ext' }
+     ivy { url 'http://artifacts.copyright.com/rup-release' }
+}
+
+dependencies {
+    compile('com.copyright.rup.works:works-workflow-camelcore:1.0.0') 
+}
