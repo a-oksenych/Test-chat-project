@@ -1,0 +1,4 @@
+rootProject.name='Test-chat-project'
+
+include 'test-chat'
+include 'services'
