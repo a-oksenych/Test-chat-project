@@ -1,0 +1,20 @@
+buildscript {
+    repositories {
+        maven { url rupRepoExtUrl }
+        ivy { url rupRepoReleaseUrl }
+    }
+    dependencies { classpath("com.copyright.rup.scm:gradle-plugins:${rupGradlePluginsVersion}") }
+}
+
+apply plugin: 'rup-java'
+
+allprojects {
+    group='com.copyright.rup.order'
+}
+
+subprojects {
+    dependencies {
+        compile 'com.copyright.rup.common:rup-common-util:1.0.+'
+        runtime 'com.copyright.rup.common:rup-common-config:1.0.+'
+    }
+}
