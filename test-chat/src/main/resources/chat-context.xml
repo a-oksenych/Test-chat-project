@@ -41,15 +41,15 @@
 		<property name="clientId" value="123"/>
 	</bean>
 	
-	<bean name="chat.component.factory" class="com.epam.chat.camel.JMSComponentFactory"/>
+	<bean name="chat.component.factory" class="com.epam.chat.camel.JmsComponentFactory"/>
 	
 	<bean name="chat.message.cache" class="com.epam.chat.service.LocalMessageCache"/>
 	
-	<bean name="chat.producer.factory" class="com.epam.chat.camel.ActiveMQProducerFactory"/>
+	<bean name="chat.producer.factory" class="com.epam.chat.camel.ActivemqProducerFactory"/>
 	
 	<bean name="chat.producer.pool" class="com.epam.chat.camel.ProducerPool"/>
 	
-	<bean name="chat.route.factory" class="com.epam.chat.camel.ActiveMQRouteFactory"/>
+	<bean name="chat.route.factory" class="com.epam.chat.camel.ActivemqRouteFactory"/>
 	
 	<bean name="chat.message.listener" class="com.epam.chat.camel.MessageListener" scope="prototype">
 		<property name="messageCache" ref="chat.message.cache"/>

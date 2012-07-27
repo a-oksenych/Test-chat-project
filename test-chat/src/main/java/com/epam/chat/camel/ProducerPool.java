@@ -7,10 +7,17 @@ import org.apache.camel.ProducerTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Maksym_Labazov
+ * 
+ */
 public class ProducerPool implements IProducerPool {
 
     private Map<String, ProducerTemplate> pool;
 
+    /**
+     * 
+     */
     public ProducerPool() {
         pool = new HashMap<>();
     }

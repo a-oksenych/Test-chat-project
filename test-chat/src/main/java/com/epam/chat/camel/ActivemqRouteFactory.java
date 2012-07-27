@@ -11,9 +11,13 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-public class ActiveMQRouteFactory implements IRouteFactory, ApplicationContextAware {
+/**
+ * @author Maksym_Labazov
+ * 
+ */
+public class ActivemqRouteFactory implements IRouteFactory, ApplicationContextAware {
 
-    Logger log = Logger.getLogger(this.getClass());
+    private Logger log = Logger.getLogger(this.getClass());
     private ApplicationContext applicationContext;
 
     @Override

@@ -14,9 +14,13 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 
+/**
+ * @author Maksym_Labazov
+ * 
+ */
 public class MessageService implements InitializingBean, IMessageService {
 
-    Logger log = Logger.getLogger(MessageService.class);
+    private Logger log = Logger.getLogger(MessageService.class);
 
     private IConnectionFactory connectionFactory;
     private String activeMQServerUrl;
@@ -61,58 +65,100 @@ public class MessageService implements InitializingBean, IMessageService {
         camelContext.start();
     }
 
+    /**
+     * @return a
+     */
     public IConnectionFactory getConnectionFactory() {
         return connectionFactory;
     }
 
+    /**
+     * @param connectionFactory s
+     */
     public void setConnectionFactory(IConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
+    /**
+     * @return asd as
+     */
     public CamelContext getCamelContext() {
         return camelContext;
     }
 
+    /**
+     * @param camelContext s
+     */
     public void setCamelContext(CamelContext camelContext) {
         this.camelContext = camelContext;
     }
 
+    /**
+     * @return s
+     */
     public IRouteFactory getRouteFactory() {
         return routeFactory;
     }
 
+    /**
+     * @param routeFactory s
+     */
     public void setRouteFactory(IRouteFactory routeFactory) {
         this.routeFactory = routeFactory;
     }
 
+    /**
+     * @return d
+     */
     public IProducerFactory getProducerFactory() {
         return producerFactory;
     }
 
+    /**
+     * @param producerFactory s
+     */
     public void setProducerFactory(IProducerFactory producerFactory) {
         this.producerFactory = producerFactory;
     }
 
+    /**
+     * @return as d
+     */
     public IProducerPool getProducerPool() {
         return producerPool;
     }
 
+    /**
+     * @param producerPool s
+     */
     public void setProducerPool(IProducerPool producerPool) {
         this.producerPool = producerPool;
     }
 
+    /**
+     * @return s
+     */
     public IUserContext getUserContext() {
         return userContext;
     }
 
+    /**
+     * @param userContext s
+     */
     public void setUserContext(IUserContext userContext) {
         this.userContext = userContext;
     }
 
+    /**
+     * @return s
+     */
     public String getActiveMQServerUrl() {
         return activeMQServerUrl;
     }
 
+    /**
+     * @param activeMQServerUrl s
+     */
     public void setActiveMQServerUrl(String activeMQServerUrl) {
         this.activeMQServerUrl = activeMQServerUrl;
     }
