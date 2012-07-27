@@ -38,3 +38,8 @@ task copyRestConfig(type: Copy) {
 	into "${buildDir}/resources/main"
 }
 copyRestConfig.execute()
+
+[jettyRun, jettyRunWar]*.with {
+	httpPort=8081
+	contextPath='account'
+}
