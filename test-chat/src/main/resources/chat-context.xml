@@ -7,6 +7,20 @@
 
 	<import resource="classpath:worksCamelCoreRes/works-camelcore-context.xml" />
 
+	<bean class="org.apache.activemq.broker.BrokerService" init-method="start">
+		<property name="transportConnectors">
+			<bean class="org.apache.activemq.broker.TransportConnector">
+				<property name="uri" value="tcp://localhost:60000"></property>
+			</bean>
+		</property>
+		<property name="networkConnectors">
+			<bean class="org.apache.activemq.network.DiscoveryNetworkConnector">
+				<property name="uri" value="multicast://default"/>
+				<property name="name" value="chet"/>
+			</bean>
+		</property>
+	</bean>
+
 	<bean id="chat.project.placeholder"
 		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="location" value="file:chat-config.properties" />
@@ -14,7 +28,7 @@
 	</bean>
 	
 	<bean name="active.mq.service" class="com.epam.chat.service.MessageService">
-		<property name="activeMQServerUrl" value="failover://tcp://localhost:61616"/>
+		<property name="activeMQServerUrl" value="failover://tcp://localhost:60000"/>
 		<property name="camelContext" ref="camelcore"/>
 		<property name="connectionFactory" ref="chat.component.factory"/>
 		<property name="routeFactory" ref="chat.route.factory"/>
