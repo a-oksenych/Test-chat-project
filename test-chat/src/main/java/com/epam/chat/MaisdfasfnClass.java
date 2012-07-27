@@ -1,3 +1,5 @@
+package com.epam.chat;
+
 import com.epam.chat.service.LocalMessageCache;
 import com.epam.chat.service.MessageService;
 
@@ -6,9 +8,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
-public class MainClass {
+/**
+ * @author Maksym_Labazov
+ * 
+ */
+public class MaisdfasfnClass {
 
-    public static void main(String[] args) throws InterruptedException {
+    /**
+     * @param args s
+     * @throws InterruptedException s
+     */
+    public void main2222(String[] args) throws InterruptedException {
         ApplicationContext context = new ClassPathXmlApplicationContext("chat-context.xml");
         LocalMessageCache messages = context.getBean(LocalMessageCache.class);
 
@@ -18,10 +28,10 @@ public class MainClass {
 
         messageService.writeMessage(room, "Hello world!!!");
 
-        Thread.currentThread().sleep(1000);
+        // Thread.currentThread().sleep(1000);
         List<String> messagesFromRoom = messages.getMessagesFromRoom(room);
 
-        System.out.println(messagesFromRoom);
+        // System.out.println(messagesFromRoom);
     }
 
 }

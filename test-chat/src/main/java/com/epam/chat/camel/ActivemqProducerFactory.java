@@ -7,9 +7,13 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.log4j.Logger;
 
-public class ActiveMQProducerFactory implements IProducerFactory {
+/**
+ * @author Maksym_Labazov
+ * 
+ */
+public class ActivemqProducerFactory implements IProducerFactory {
 
-    private Logger logger = Logger.getLogger(ActiveMQProducerFactory.class);
+    private Logger logger = Logger.getLogger(ActivemqProducerFactory.class);
 
     @Override
     public ProducerTemplate createProducer(String room, CamelContext context) {

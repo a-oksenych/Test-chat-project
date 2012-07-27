@@ -7,10 +7,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Maksym_Labazov
+ * 
+ */
 public class LocalMessageCache implements IMessageCache {
 
     private Map<String, List<String>> cache;
 
+    /**
+     * 
+     */
     public LocalMessageCache() {
         cache = new HashMap<>();
     }
