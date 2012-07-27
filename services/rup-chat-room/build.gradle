@@ -8,11 +8,11 @@ buildscript {
     }
 }
 
-apply plugin: "java"
 apply plugin: "rup-java"
+apply plugin: "jetty"
 
 dependencies {
-	compile ("org.springframework:spring-webmvc:${rupJava.standardDependencies.spring.version}")
+	compile project(':rup-chat-common')
 
 	compile ("com.copyright.rup.common:rup-common-util:${rupGradlePluginsVersion}")
 	
@@ -32,3 +32,9 @@ dependencies {
     compile ("org.springframework:spring-test:${rupJava.standardDependencies.spring.version}")
     compile ("junit:junit-dep:${rupJava.standardDependencies.junit.version}")
 }
+
+task copyRestConfig(type: Copy) {
+	from "${project(':rup-chat-common').projectDir}/src/main/resources"
+	into "${buildDir}/resources/main"
+}
+copyRestConfig.execute()
