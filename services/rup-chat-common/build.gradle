@@ -1,1 +1,16 @@
+buildscript {
+    repositories {
+        maven { url rupRepoExtUrl }
+        ivy { url rupRepoReleaseUrl }
+    }
+    dependencies {
+        classpath("com.copyright.rup.scm:gradle-plugins:${rupGradlePluginsVersion}")
+    }
+}
+
 apply plugin: "java"
+apply plugin: "rup-java"
+
+dependencies {
+	compile ("org.springframework:spring-webmvc:${rupJava.standardDependencies.spring.version}")
+}
