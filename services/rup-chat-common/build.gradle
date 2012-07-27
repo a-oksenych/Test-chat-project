@@ -13,4 +13,22 @@ apply plugin: "rup-java"
 
 dependencies {
 	compile ("org.springframework:spring-webmvc:${rupJava.standardDependencies.spring.version}")
+
+	compile ("com.copyright.rup.common:rup-common-util:${rupGradlePluginsVersion}")
+	
+	compile ("com.thoughtworks.xstream:xstream:1.4.+")
+	// Not using jackson 2.0 because of lack of spring support
+	compile ("org.codehaus.jackson:jackson-mapper-asl:1.9.+")
+	compile ("org.springframework:spring-oxm:${rupJava.standardDependencies.spring.version}")
+
+    compile ("org.springframework:spring-web:${rupJava.standardDependencies.spring.version}")
+    compile ("org.springframework:spring-webmvc:${rupJava.standardDependencies.spring.version}")
+
+    //TODO: cannot use providedCompile without war plugin
+    compile ("javax.servlet:javax.servlet-api:3.0.1")
+
+    //compile ("org.powermock:powermock-api-easymock:1.4.9")
+
+    compile ("org.springframework:spring-test:${rupJava.standardDependencies.spring.version}")
+    compile ("junit:junit-dep:${rupJava.standardDependencies.junit.version}")
 }

@@ -3,6 +3,8 @@ package com.copyright.rup.chat.common;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 
 /**
  * @author Oleksandr Dekhtyar
@@ -49,4 +51,9 @@ public class Room implements Serializable {
         this.users = users;
     }
 
+    
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }
