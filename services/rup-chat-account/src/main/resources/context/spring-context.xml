@@ -11,9 +11,9 @@
 
 	<import resource="classpath:/context/spring-rest-provider.xml" />
 
-	<context:component-scan base-package="com.copyright.rup.chat.room" />
+	<context:component-scan base-package="com.copyright.rup.chat.account" />
 
-	<bean id="daoRoom" class="com.copyright.rup.chat.room.DAORoomStub" />
+	<bean id="daoAccount" class="com.copyright.rup.chat.account.DAOAccountStub" />
 
 	<mvc:annotation-driven />
 </beans>

@@ -1,0 +1,5 @@
+apply plugin: 'java'
+
+allprojects {
+    group='com.copyright.rup.chat'
+}
