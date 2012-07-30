@@ -4,14 +4,15 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
  
 <configuration>
+	<properties resource="database.properties"/>
     <environments default="development">
         <environment id="development">
           <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/blog"/>
-                <property name="username" value="admin"/>
-                <property name="password" value="admin"/>
+            <dataSource type="UNPOOLED">
+                <property name="driver" value="${database.driver}"/>
+                <property name="url" value="${database.url}"/>
+                <property name="username" value="${database.username}"/>
+                <property name="password" value="${database.password}"/>
             </dataSource>
        </environment>
     </environments>

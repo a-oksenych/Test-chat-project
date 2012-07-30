@@ -8,22 +8,16 @@ import java.io.Reader;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
-import com.epam.chat.dao.InfoDAO.InfoMapper;
+import org.apache.ibatis.io.Resources;
 
 public class MyBatisConnectionFactory {
 	private static SqlSessionFactory sqlSessionFactory;
 
 	static {
-		Reader reader = null;
 		try {
-			InputStream in = MyBatisConnectionFactory.class.getResourceAsStream("myBatisConfiguration.xml");
-			reader = new InputStreamReader(in);
-			if (sqlSessionFactory == null) {
-				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-				sqlSessionFactory.getConfiguration().addMapper(InfoMapper.class);
-			}
-			in.close();
+			Reader reader;
+			reader = Resources.getResourceAsReader("myBatisConfiguration.xml");
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 		} catch (FileNotFoundException fileNotFoundException) {
 			fileNotFoundException.printStackTrace();
 		} catch (IOException iOException) {
