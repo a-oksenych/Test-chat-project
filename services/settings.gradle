@@ -2,4 +2,4 @@ rootProject.name='rup-chat'
 
 include 'rup-chat-common'
 include 'rup-chat-account'
-include 'room'
+include 'rup-chat-room'
