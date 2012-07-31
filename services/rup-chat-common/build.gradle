@@ -1,17 +1,18 @@
-apply plugin: "eclipse"
+apply plugin: 'java'
+apply plugin: 'rup-java'
 
 buildscript {
     repositories {
-        maven { url rupRepoExtUrl }
-        ivy { url rupRepoReleaseUrl }
+        maven {url rupRepoExtUrl}
+        ivy {url rupRepoReleaseUrl }
+        if (project.hasProperty('developPlugins')) {
+            ivy {url file(System.getProperty('user.home') + '/.ivylocal')}
+        }
     }
     dependencies {
         classpath("com.copyright.rup.scm:gradle-plugins:${rupGradlePluginsVersion}")
     }
 }
-
-apply plugin: "java"
-apply plugin: "rup-java"
 
 dependencies {
 	compile ("org.springframework:spring-webmvc:${rupJava.standardDependencies.spring.version}")
@@ -33,4 +34,35 @@ dependencies {
 
     compile ("org.springframework:spring-test:${rupJava.standardDependencies.spring.version}")
     compile ("junit:junit-dep:${rupJava.standardDependencies.junit.version}")
+
+    compile ("commons-lang:commons-lang:2.4")
 }
+
+task loadProperties {
+	File props = new File('../../config.properties')
+	def userProps = new Properties() 
+	props.withReader { reader -> 
+	  userProps.load(reader) 
+	  rootProject.getAdditionalProperties().putAll(userProps)
+	}
+}
+
+/*
+task loadWebProperties(type: Copy) {
+	println '--------------------------------------------------------------------------------------------------------'
+	def sep = System.properties['file.separator'];
+	println "${project.projectDir}${sep}src${sep}main${sep}resources"
+	println "${rootProject.buildDir}${sep}resources${sep}main"
+	println '--------------------------------------------------------------------------------------------------------'
+	from "${project.projectDir}${sep}src${sep}main${sep}resources"
+	into "${rootProject.buildDir}${sep}resources${sep}main"
+}
+*/
+
+processResources.dependsOn loadProperties
+
+/*
+[processResources,build].each{ task ->
+	task.dependsOn loadProperties
+}
+*/
