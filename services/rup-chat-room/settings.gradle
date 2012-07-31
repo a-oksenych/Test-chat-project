@@ -1,0 +1,5 @@
+rootProject.name='rup-chat-room'
+
+include '../rup-chat-common'
+// include 'rup-chat-account'
+// include 'rup-chat-room'
