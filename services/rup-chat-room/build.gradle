@@ -1,45 +1,50 @@
-buildscript {
-    repositories {
-        maven { url rupRepoExtUrl }
-        ivy { url rupRepoReleaseUrl }
-    }
-    dependencies {
-        classpath("com.copyright.rup.scm:gradle-plugins:${rupGradlePluginsVersion}")
-    }
+evaluationDependsOn('../rup-chat-common')
+
+repositories {
+	mavenCentral()
+	maven { url rupRepoExtUrl }
+	ivy { url rupRepoReleaseUrl }
+	if (project.hasProperty('developPlugins')) {
+		ivy {url file(System.getProperty('user.home') + '/.ivylocal')}
+	}
 }
 
-apply plugin: "rup-java"
+//apply plugin: "java"
 apply plugin: "jetty"
 
 dependencies {
-	compile project(':rup-chat-common')
-
-	compile ("com.copyright.rup.common:rup-common-util:${rupGradlePluginsVersion}")
-	
-	compile ("com.thoughtworks.xstream:xstream:1.4.+")
-	// Not using jackson 2.0 because of lack of spring support
-	compile ("org.codehaus.jackson:jackson-mapper-asl:1.9.+")
-	compile ("org.springframework:spring-oxm:${rupJava.standardDependencies.spring.version}")
-
-    compile ("org.springframework:spring-web:${rupJava.standardDependencies.spring.version}")
-    compile ("org.springframework:spring-webmvc:${rupJava.standardDependencies.spring.version}")
-
-    //TODO: cannot use providedCompile without war plugin
-    compile ("javax.servlet:javax.servlet-api:3.0.1")
-
-    //compile ("org.powermock:powermock-api-easymock:1.4.9")
-
-    compile ("org.springframework:spring-test:${rupJava.standardDependencies.spring.version}")
-    compile ("junit:junit-dep:${rupJava.standardDependencies.junit.version}")
+	compile project('../rup-chat-common')
 }
 
+/*
 task copyRestConfig(type: Copy) {
-	from "${project(':rup-chat-common').projectDir}/src/main/resources"
+	from "${project('../rup-chat-common').projectDir}/src/main/resources"
 	into "${buildDir}/resources/main"
 }
 copyRestConfig.execute()
 
+buildscript {
+    dependencies {
+        //classpath project('../rup-chat-common').classes
+    }
+}
+
+task copyRestConfig(type: Copy) {
+	from "${project('../rup-chat-common').projectDir}/src/main/resources"
+	into "${buildDir}/resources/main"
+}
+//copyRestConfig.execute()
+
+//jettyRun.dependsOn task('loadWebProperties')
+//build.dependsOn task('../rup-chat-common:loadWebProperties')
+//build.dependsOn task('loadWebProperties')
+
 [jettyRun, jettyRunWar]*.with {
-	httpPort=8082
-	contextPath='room'
+	httpPort=new Integer(copyrightRoomPort)
+	contextPath=copyrightRoomPath
+}
+*/
+[jettyRun, jettyRunWar]*.with {
+	httpPort=new Integer(copyrightRoomPort)
+	contextPath=copyrightRoomPath
 }
