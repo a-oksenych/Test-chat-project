@@ -31,6 +31,9 @@ dependencies {
     compile ("javax.servlet:javax.servlet-api:3.0.1")
 
     //compile ("org.powermock:powermock-api-easymock:1.4.9")
+	
+	//MyBatis
+	compile ("org.mybatis:mybatis:3.1.1")
 
     compile ("org.springframework:spring-test:${rupJava.standardDependencies.spring.version}")
     compile ("junit:junit-dep:${rupJava.standardDependencies.junit.version}")
