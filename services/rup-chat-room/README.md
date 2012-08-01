@@ -1,2 +1,2 @@
-room REST service
+Room REST service
 ==========
