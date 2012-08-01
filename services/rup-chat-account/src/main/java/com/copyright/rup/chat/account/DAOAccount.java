@@ -16,7 +16,7 @@ import com.copyright.rup.chat.common.Room;
  * @author Andriy Oksenych
  * 
  */
-public class DAOAccount implements IDAOAccount, InfoMapper {
+public class DAOAccount implements IDAOAccount, IInfoMapper {
 	Logger logger = Logger.getLogger(DAOAccountStub.class);
 
     @Override
@@ -24,8 +24,8 @@ public class DAOAccount implements IDAOAccount, InfoMapper {
     	Account createdAccount = null;
         SqlSession session = getSession();
 		try {
-			InfoMapper mapper = session.getMapper(InfoMapper.class);
-			createdAccount = mapper.insertInformation(account);
+			IInfoMapper mapper = session.getMapper(IInfoMapper.class);
+			createdAccount = mapper.createAccount(account);
 		} catch (Exception e) {
 			logger.error("Can't create an account");
 		} finally {
@@ -37,36 +37,42 @@ public class DAOAccount implements IDAOAccount, InfoMapper {
 
     @Override
     public Account getAccount(int idAccount) {
+    	Account selectedAccount = null;
     	SqlSession session = getSession();
 		try {
-			InfoMapper mapper = session.getMapper(InfoMapper.class);
-			return mapper.getAccount(idAccount);
+			IInfoMapper mapper = session.getMapper(IInfoMapper.class);
+			selectedAccount = mapper.getAccount(idAccount);
 		} catch (Exception e) {
 			logger.error("Can't select an account");
 		} finally {
 			session.close();
 		}
+		
+		return selectedAccount;
     }
 
     @Override
     public Account updateAccount(Account account) {
+    	Account updatedAccount = null;
     	SqlSession session = getSession();
 		try {
-			InfoMapper mapper = session.getMapper(InfoMapper.class);
-			mapper.updateAccount(account);
+			IInfoMapper mapper = session.getMapper(IInfoMapper.class);
+			updatedAccount = mapper.updateAccount(account);
 		} catch (Exception e) {
 			logger.error("Can't update an account");
 		} finally {
 			session.close();
 		}
+		
+		return updatedAccount;
     }
 
     @Override
     public void deleteAccount(int idAccount) {
     	SqlSession session = getSession();
 		try {
-			InfoMapper mapper = session.getMapper(InfoMapper.class);
-			mapper.deleteAccount(id);
+			IInfoMapper mapper = session.getMapper(IInfoMapper.class);
+			mapper.deleteAccount(idAccount);
 		} catch (Exception e) {
 			logger.error("Can't delete an account");
 		} finally {
@@ -79,7 +85,7 @@ public class DAOAccount implements IDAOAccount, InfoMapper {
     	List<Room> rooms = null;
     	SqlSession session = getSession();
 		try {
-			InfoMapper mapper = session.getMapper(InfoMapper.class);
+			IInfoMapper mapper = session.getMapper(IInfoMapper.class);
 			rooms = mapper.getRoomsForAccount(idAccount);
 		} catch (Exception e) {
 			logger.error("Can't delete an account");
