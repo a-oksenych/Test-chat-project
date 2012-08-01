@@ -4,7 +4,7 @@ apply plugin: 'rup-java'
 buildscript {
     repositories {
         maven {url rupRepoExtUrl}
-        ivy {url rupRepoReleaseUrl }
+        ivy {url rupRepoReleaseUrl}
         if (project.hasProperty('developPlugins')) {
             ivy {url file(System.getProperty('user.home') + '/.ivylocal')}
         }
@@ -15,14 +15,14 @@ buildscript {
 }
 
 dependencies {
-	compile ("org.springframework:spring-webmvc:${rupJava.standardDependencies.spring.version}")
+    compile ("org.springframework:spring-webmvc:${rupJava.standardDependencies.spring.version}")
 
-	compile ("com.copyright.rup.common:rup-common-util:${rupGradlePluginsVersion}")
-	
-	compile ("com.thoughtworks.xstream:xstream:1.4.+")
-	// Not using jackson 2.0 because of lack of spring support
-	compile ("org.codehaus.jackson:jackson-mapper-asl:1.9.+")
-	compile ("org.springframework:spring-oxm:${rupJava.standardDependencies.spring.version}")
+    compile ("com.copyright.rup.common:rup-common-util:${rupGradlePluginsVersion}")
+
+    compile ("com.thoughtworks.xstream:xstream:1.4.+")
+    // Not using jackson 2.0 because of lack of spring support
+    compile ("org.codehaus.jackson:jackson-mapper-asl:1.9.+")
+    compile ("org.springframework:spring-oxm:${rupJava.standardDependencies.spring.version}")
 
     compile ("org.springframework:spring-web:${rupJava.standardDependencies.spring.version}")
     compile ("org.springframework:spring-webmvc:${rupJava.standardDependencies.spring.version}")
@@ -39,30 +39,29 @@ dependencies {
 }
 
 task loadProperties {
-	File props = new File('../../config.properties')
-	def userProps = new Properties() 
-	props.withReader { reader -> 
-	  userProps.load(reader) 
-	  rootProject.getAdditionalProperties().putAll(userProps)
-	}
+    File props = new File('../../config.properties')
+    def userProps = new Properties() 
+    props.withReader { reader -> 
+        userProps.load(reader) 
+        rootProject.getAdditionalProperties().putAll(userProps)
+    }
 }
-
-/*
-task loadWebProperties(type: Copy) {
-	println '--------------------------------------------------------------------------------------------------------'
-	def sep = System.properties['file.separator'];
-	println "${project.projectDir}${sep}src${sep}main${sep}resources"
-	println "${rootProject.buildDir}${sep}resources${sep}main"
-	println '--------------------------------------------------------------------------------------------------------'
-	from "${project.projectDir}${sep}src${sep}main${sep}resources"
-	into "${rootProject.buildDir}${sep}resources${sep}main"
-}
-*/
-
 processResources.dependsOn loadProperties
 
 /*
+task loadWebProperties(type: Copy) {
+    println '--------------------------------------------------------------------------------------------------------'
+    def sep = System.properties['file.separator'];
+    println "${project.projectDir}${sep}src${sep}main${sep}resources"
+    println "${rootProject.buildDir}${sep}resources${sep}main"
+    println '--------------------------------------------------------------------------------------------------------'
+    from "${project.projectDir}${sep}src${sep}main${sep}resources"
+    into "${rootProject.buildDir}${sep}resources${sep}main"
+}
+*/
+
+/*
 [processResources,build].each{ task ->
-	task.dependsOn loadProperties
+    task.dependsOn loadProperties
 }
 */
