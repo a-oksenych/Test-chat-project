@@ -1,2 +1,2 @@
-account REST service
+Account REST service
 ==========

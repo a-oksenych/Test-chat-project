@@ -1,4 +1,13 @@
 rootProject.name='Test-chat-project'
 
 include 'test-chat'
-include 'services'
+
+include 'rup-chat-account'
+include 'rup-chat-common'
+include 'rup-chat-db'
+include 'rup-chat-room'
+
+project(':rup-chat-account').projectDir = new File(rootDir, 'services/rup-chat-account')
+project(':rup-chat-common').projectDir = new File(rootDir, 'services/rup-chat-common')
+project(':rup-chat-db').projectDir = new File(rootDir, 'services/rup-chat-db')
+project(':rup-chat-room').projectDir = new File(rootDir, 'services/rup-chat-room')

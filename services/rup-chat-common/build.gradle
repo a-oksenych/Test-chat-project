@@ -42,12 +42,12 @@ dependencies {
 }
 
 task loadProperties {
-    File props = new File('../../config.properties')
+    def props = ['../../config.properties']
     def userProps = new Properties() 
-    props.withReader { reader -> 
-        userProps.load(reader) 
-        rootProject.getAdditionalProperties().putAll(userProps)
+    props.each { property ->
+        userProps.load(new FileReader("${project.projectDir}${System.properties['file.separator']}${property}")) 
     }
+    rootProject.getAdditionalProperties().putAll(userProps)
 }
 processResources.dependsOn loadProperties
 
