@@ -1,0 +1,5 @@
+//rootProject.name='rup-chat-account'
+
+include 'rup-chat-common'
+
+project(':rup-chat-common').projectDir = new File(rootDir, '../services/rup-chat-common')

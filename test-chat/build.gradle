@@ -7,8 +7,10 @@ repositories {
 }
 
 dependencies {
+	compile project(':rup-chat-common')
     compile('com.copyright.rup.works:works-workflow-camelcore:1.0.0') 
     compile('org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1') 
     compile('org.apache.activemq:activemq-core:5.6.0') 
     compile('org.apache.activemq:activemq-camel:5.6.0') 
+    compile('org.apache.httpcomponents:httpclient:4.2') 
 }
