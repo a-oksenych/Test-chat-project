@@ -1,2 +1,2 @@
 CD services\rup-chat-account
-start "ACCOUNT" gradle --refresh dependencies jettyRun
+START "ACCOUNT" gradle --refresh dependencies jettyRun
