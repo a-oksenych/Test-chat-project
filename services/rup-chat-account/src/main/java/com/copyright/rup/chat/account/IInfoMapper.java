@@ -13,15 +13,19 @@ import org.apache.ibatis.annotations.Delete;
 import com.copyright.rup.chat.common.Account;
 import com.copyright.rup.chat.common.Room;
 
+/**
+ * @author Andriy Oksenych
+ * 
+ */
 public interface IInfoMapper {
-	final String CREATE_ACCOUNT = "INSERT INTO account(name, email, password) VALUES (#{name}, #{email}, #{password})";
-	final String GET_ACCOUNT = "SELECT id, name, email, password FROM account WHERE id = #{idAccount}";
-	final String UPDATE_ACCOUNT = "UPDATE account SET name = #{name}, email = #{email}, password = #{password} WHERE id = #{id}";
-	final String DELETE_ACCOUNT = "DELETE FROM account JOIN room_account ON account.id = room_account.id_account WHERE id = #{idAccount}";
-	final String GET_ROOMS_FOR_ACCOUNT = "SELECT id, name, description FROM room where id IN (SELECT id_room FROM room_account WHERE id_account = #{idAccount})";
+	final String CREATE_ACCOUNT = "SET search_path TO chat_db; INSERT INTO account(name, email, password) VALUES (#{name}, #{email}, #{password}); SELECT CURRVAL('account_uid_seq')";
+	final String GET_ACCOUNT = "SELECT account_uid, name, email, password FROM chat_db.account WHERE account_uid = #{idAccount}";
+	final String UPDATE_ACCOUNT = "UPDATE chat_db.account SET name = #{name}, e-mail = #{email}, password = #{password} WHERE account_uid = #{id}";
+	final String DELETE_ACCOUNT = "DELETE FROM chat_db.account JOIN chat_db.account_2_room ON chat_db.account.account_uid = chat_db.account_2_room.account_uid WHERE account_uid = #{idAccount}";
+	final String GET_ROOMS_FOR_ACCOUNT = "SELECT room_uid, name, description FROM chat_db.room where room_uid IN (SELECT room_uid FROM chat_db.account_2_room WHERE account_uid = #{idAccount})";
 	
 	@Insert(CREATE_ACCOUNT)
-	public Account createAccount(Account account) throws Exception;
+	public Integer createAccountMyBatis(Account account) throws Exception;
 	
 	@Select(GET_ACCOUNT)
 	@Results(value = {
