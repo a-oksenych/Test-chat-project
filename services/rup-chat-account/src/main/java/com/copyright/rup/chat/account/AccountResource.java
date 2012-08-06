@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.copyright.rup.chat.common.Account;
 
@@ -26,6 +27,7 @@ public class AccountResource {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @ResponseBody
     public Account createAccount(HttpServletRequest request, HttpServletResponse response,
             @RequestBody String serializedAccount) {
         try {
@@ -38,11 +40,13 @@ public class AccountResource {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
     public Account getAccount(@PathVariable int id) {
         return accountService.getAccount(id);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @ResponseBody
     public Account updateAccount(HttpServletRequest request, HttpServletResponse response,
             @RequestBody String serializedAccount) {
         try {
