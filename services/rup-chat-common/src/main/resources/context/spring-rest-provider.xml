@@ -31,19 +31,14 @@
 		<property name="ignoreAcceptHeader" value="true" />
 	</bean>
 	
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" scope="singleton">
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
     </bean>
     
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" scope="singleton">
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="org.postgresql.Driver" /> 
         <property name="url" value="jdbc:postgresql://192.168.126.25:5432/chat_db" />
         <property name="username" value="postgres" />
         <property name="password" value="devdtdb123" />
-    </bean>
-    
-    <bean id="infoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" scope="singleton">
-        <property name="mapperInterface" value="com.copyright.rup.chat.account.IInfoMapper" />
-        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 </beans>
