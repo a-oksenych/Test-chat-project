@@ -36,6 +36,9 @@ dependencies {
 	
 	//MyBatis
 	compile ("org.mybatis:mybatis:3.1.1")
+	compile ("postgresql:postgresql:9.1-901-1.jdbc4")
+	compile ("org.mybatis:mybatis-spring:1.1.1")
+	compile ("commons-dbcp:commons-dbcp:1.4")
 
     compile ("org.springframework:spring-test:${rupJava.standardDependencies.spring.version}")
     compile ("junit:junit-dep:${rupJava.standardDependencies.junit.version}")

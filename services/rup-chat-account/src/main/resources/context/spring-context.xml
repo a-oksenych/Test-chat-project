@@ -13,7 +13,9 @@
 
 	<context:component-scan base-package="com.copyright.rup.chat.account" />
 
-	<bean id="daoAccount" class="com.copyright.rup.chat.account.DAOAccountStub" />
+	<bean id="daoAccount" class="com.copyright.rup.chat.account.DaoAccount" >
+	    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
 
 	<mvc:annotation-driven />
 </beans>
