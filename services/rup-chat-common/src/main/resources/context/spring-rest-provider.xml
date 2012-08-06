@@ -9,10 +9,8 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<context:component-scan base-package="com.copyright.rup.chat.room" />
-	<context:component-scan base-package="com.copyright.rup.rest.provider" />
-
-	<bean id="restView" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	<bean id="restView"
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="order" value="1" />
 		<property name="defaultContentType" value="application/json" />
 		<property name="mediaTypes">
@@ -22,7 +20,10 @@
 		</property>
 		<property name="defaultViews">
 			<list>
-				<bean id="jacksonMarshallingView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+				<bean id="jacksonMarshallingView"
+					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+					<property name="objectMapper" ref="objectMapper" />
+				</bean>
 			</list>
 		</property>
 		<property name="parameterName" value="fmt" />
