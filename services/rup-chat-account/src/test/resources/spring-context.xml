@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<import resource="classpath:/context/spring-rest-provider.xml" />
+
+	<context:component-scan base-package="com.copyright.rup.chat.account" />
+
+	<bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+	      <property name="dataSource" ref="database.dataSource" />
+	      <property name="changeLog" value="classpath:changelog.groovy" />
+	      <property name="contexts" value="test, production"></property>
+	</bean>
+
+	<bean id="database.dataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+	    <constructor-arg>
+	        <bean class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	            <property name="driverClass" value="org.h2.Driver" />
+	            <property name="url"
+	                value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;TRACE_LEVEL_SYSTEM_OUT=2" />
+	        </bean>
+	    </constructor-arg>
+	</bean>
+	
+	<bean id="userMapperFactory" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	  <property name="basePackage" value="com.copyright.rup.chat.account" />
+	  <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	  <property name="dataSource" ref="database.dataSource" />
+	</bean>
+		
+
+</beans>
