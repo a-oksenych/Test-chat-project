@@ -7,6 +7,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonMethod;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -19,6 +21,7 @@ import java.util.Map;
  * 
  */
 @JsonAutoDetect(JsonMethod.NONE)
+@JsonTypeInfo(use = Id.CLASS)
 public class Room implements Serializable {
 
     private static final long serialVersionUID = 5063347195226440297L;

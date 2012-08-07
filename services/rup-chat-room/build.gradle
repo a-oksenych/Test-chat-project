@@ -17,6 +17,10 @@ dependencies {
     compile ('httpunit:httpunit:1.7')
 }
 
+test {
+  exclude '**/*IT.class'
+}
+
 /*
 task copyRestConfig(type: Copy) {
     from "${project(':rup-chat-common').projectDir}/src/main/resources"

@@ -7,6 +7,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonMethod;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -18,6 +20,7 @@ import java.util.Map;
  * 
  */
 @JsonAutoDetect(JsonMethod.NONE)
+@JsonTypeInfo(use = Id.CLASS)
 public class Account {
 
     @JsonProperty
