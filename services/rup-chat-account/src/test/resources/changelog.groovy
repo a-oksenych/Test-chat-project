@@ -50,5 +50,4 @@ databaseChangeLog {
   changeSet(id: '1343662408957-6', author: 'Maksym_Labazov (generated)') {
     addForeignKeyConstraint(baseColumnNames: 'room_uid', baseTableName: 'account_2_room', baseTableSchemaName: 'chat_db', constraintName: 'Relationship2', deferrable: false, initiallyDeferred: false, onDelete: 'NO ACTION', onUpdate: 'NO ACTION', referencedColumnNames: 'room_uid', referencedTableName: 'room', referencedTableSchemaName: 'chat_db', referencesUniqueColumn: false)
   }
-
 }
