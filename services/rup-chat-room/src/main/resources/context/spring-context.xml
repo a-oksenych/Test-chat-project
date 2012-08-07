@@ -15,5 +15,7 @@
 
 	<bean id="daoRoom" class="com.copyright.rup.chat.room.DAORoomStub" />
 
+	<bean id="objectMapper" class="com.copyright.rup.chat.common.CustomObjectMapper" />
+
 	<mvc:annotation-driven />
 </beans>

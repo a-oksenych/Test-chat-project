@@ -1,7 +1,6 @@
 package com.copyright.rup.chat.room;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.copyright.rup.chat.common.Room;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.copyright.rup.chat.common.Room;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Oleksandr Dekhtyar
@@ -23,9 +24,11 @@ public class RoomResource {
     @Autowired
     private RoomService roomService;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @ResponseBody
     public Room createRoom(HttpServletRequest request, HttpServletResponse response,
             @RequestBody String serializedRoom) {
         try {
@@ -38,11 +41,13 @@ public class RoomResource {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
     public Room getRoom(@PathVariable int id) {
         return roomService.getRoom(id);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @ResponseBody
     public Room updateRoom(HttpServletRequest request, HttpServletResponse response,
             @RequestBody String serializedRoom) {
         try {

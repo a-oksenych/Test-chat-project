@@ -9,18 +9,11 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<import resource="classpath:/context/spring-rest-provider.xml" />
+	<context:component-scan base-package="com.copyright.rup.chat.room" />
 
-	<context:component-scan base-package="com.copyright.rup.chat.account" />
+	<bean id="daoRoom" class="com.copyright.rup.chat.room.DAORoomStub" />
 
-	<bean id="daoAccount" class="com.copyright.rup.chat.account.DaoAccount" >
-	    <property name="mapper" ref="infoMapper" />
-	</bean>
-	
-	<bean id="infoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.copyright.rup.chat.account.IInfoMapper" />
-        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
-    </bean>
+	<bean id="objectMapper" class="com.copyright.rup.chat.common.CustomObjectMapper" />
 
 	<mvc:annotation-driven />
 </beans>

@@ -9,10 +9,8 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<context:component-scan base-package="com.copyright.rup.chat.room" />
-	<context:component-scan base-package="com.copyright.rup.rest.provider" />
-
-	<bean id="restView" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	<bean id="restView"
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="order" value="1" />
 		<property name="defaultContentType" value="application/json" />
 		<property name="mediaTypes">
@@ -22,7 +20,10 @@
 		</property>
 		<property name="defaultViews">
 			<list>
-				<bean id="jacksonMarshallingView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+				<bean id="jacksonMarshallingView"
+					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+					<property name="objectMapper" ref="objectMapper" />
+				</bean>
 			</list>
 		</property>
 		<property name="parameterName" value="fmt" />
@@ -30,19 +31,14 @@
 		<property name="ignoreAcceptHeader" value="true" />
 	</bean>
 	
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" scope="singleton">
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
     </bean>
     
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" scope="singleton">
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="org.postgresql.Driver" /> 
         <property name="url" value="jdbc:postgresql://192.168.126.25:5432/chat_db" />
         <property name="username" value="postgres" />
         <property name="password" value="devdtdb123" />
-    </bean>
-    
-    <bean id="infoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" scope="singleton">
-        <property name="mapperInterface" value="com.copyright.rup.chat.account.IInfoMapper" />
-        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 </beans>

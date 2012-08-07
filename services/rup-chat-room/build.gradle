@@ -13,6 +13,8 @@ apply plugin: "jetty"
 
 dependencies {
     compile project(':rup-chat-common')
+
+    compile ('httpunit:httpunit:1.7')
 }
 
 /*
