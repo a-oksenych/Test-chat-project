@@ -8,14 +8,7 @@ buildscript {
     }
 }
 
-
 apply plugin: 'rup-postgres'
-apply plugin: 'rup-mybatis'
-
-
-// Build this up from the pieces defined in gradle.properties
-setProperty("dbAdminURL","jdbc:postgresql://${dbRUPHost}:${dbRUPPort}")
-setProperty("dbRUPURL","jdbc:postgresql://${dbRUPHost}:${dbRUPPort}/${dbRUPDatabase}")
 
 changelogs { 
   main {
@@ -23,17 +16,9 @@ changelogs {
   }
 }
 
-task configureRupDatabase << {
-	databases.party.url = "${dbRUPURL}"
-	databases.party.username = "${dbRUPUsername}"
-	databases.party.password = "${dbRUPPassword}"
-}
-
-task configureCommonUpdate(dependsOn: 'configureRupDatabase') << {
-	changelogs.main.file = file('changelog-1.0.groovy')
-}
-
-task commonUpdateDatabase(dependsOn: ['configureCommonUpdate', 'update'])
+// Build this up from the pieces defined in gradle.properties
+setProperty("dbAdminURL","jdbc:postgresql://${dbRUPHost}:${dbRUPPort}")
+setProperty("dbRUPURL","jdbc:postgresql://${dbRUPHost}:${dbRUPPort}/${dbRUPDatabase}")
 
 databases {
     party {
@@ -44,9 +29,3 @@ databases {
 }
 
 workingDatabase = databases.party
-
-generateChangelog {
-    mkdir "$rupResultsDir/liquibase"
-    // To generate a full schema build script, uncomment the following line, then run 'gradle generateChangelog'
-   //changelogs.main.file = file("$rupResultsDir/liquibase/buildFromScratch.groovy")
-}
