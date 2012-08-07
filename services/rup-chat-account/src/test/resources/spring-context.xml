@@ -37,6 +37,4 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	  <property name="dataSource" ref="database.dataSource" />
 	</bean>
-		
-
 </beans>
