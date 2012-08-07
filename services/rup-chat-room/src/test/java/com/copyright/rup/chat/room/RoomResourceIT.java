@@ -31,6 +31,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -77,16 +78,16 @@ public class RoomResourceIT {
         WebRequest request = new PostMethodWebRequest(getCreateUrl(), new ByteArrayInputStream(objectMapper
                 .writeValueAsString(baseRoom).getBytes()), MediaType.APPLICATION_JSON_VALUE);
         WebResponse response = conversation.getResponse(request);
-        assertEquals(HttpURLConnection.HTTP_OK, response.getResponseCode());
+        assertEquals(HttpURLConnection.HTTP_CREATED, response.getResponseCode());
         assertEquals(MediaType.APPLICATION_JSON_VALUE, response.getContentType());
         Room room = objectMapper.readValue(response.getText(), Room.class);
         assertNotNull(room);
         assertTrue(room.getId() != 0);
         assertTrue(compare(baseRoom, room, "id"));
 
+        // update room
         baseRoom = room;
         baseRoom.setName("New name");
-
         request = new PutMethodWebRequest(getUpdateUrl(), new ByteArrayInputStream(objectMapper
                 .writeValueAsString(baseRoom).getBytes()), MediaType.APPLICATION_JSON_VALUE);
         response = conversation.getResponse(request);
@@ -96,6 +97,7 @@ public class RoomResourceIT {
         assertNotNull(room);
         assertEquals(room, baseRoom);
 
+        // get room
         request = new GetMethodWebRequest(getViewUrl(baseRoom.getId()));
         response = conversation.getResponse(request);
         assertEquals(HttpURLConnection.HTTP_OK, response.getResponseCode());
@@ -104,6 +106,7 @@ public class RoomResourceIT {
         assertNotNull(room);
         assertEquals(room, baseRoom);
 
+        // remove room
         request = new WebRequest(getDeleteUrl(baseRoom.getId())) {
 
             @Override
@@ -113,6 +116,12 @@ public class RoomResourceIT {
         };
         response = conversation.getResponse(request);
         assertEquals(HttpURLConnection.HTTP_OK, response.getResponseCode());
+
+        // check removed
+        URL url = new URL(getViewUrl(baseRoom.getId()));
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.connect();
+        assertEquals(HttpURLConnection.HTTP_NO_CONTENT, connection.getResponseCode());
     }
 
     private boolean compare(Object bean1, Object bean2, String... ignored) throws Exception {
