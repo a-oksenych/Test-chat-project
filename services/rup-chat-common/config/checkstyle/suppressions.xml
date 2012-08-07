@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+    <!-- Generated Code -->
+    <suppress checks="ImportOrder"              files="src[/\\]main[/\\]java[/\\].*[/\\]gen[/\\].*"/>
+    <suppress checks="RedundantImport"          files="src[/\\]main[/\\]java[/\\].*[/\\]gen[/\\].*"/>
+    <suppress checks="LineLength"               files="src[/\\]main[/\\]java[/\\].*[/\\]gen[/\\].*"/>
+
+    <!-- Unit tests -->
+    <suppress checks="MagicNumber"              files="src[/\\]test[/\\]java[/\\].*"/>
+    <suppress checks="JavadocMethod"            files="src[/\\]test[/\\]java[/\\].*"/>
+    <suppress checks="ExecutableStatementCount" files="src[/\\]test[/\\]java[/\\].*"/>
+    <suppress checks="MethodLength"             files="src[/\\]test[/\\]java[/\\].*"/>
+
+    <!-- Integration tests -->
+    <suppress checks="MagicNumber"              files="src[/\\]testInteg[/\\]java[/\\].*"/>
+    <suppress checks="JavadocMethod"            files="src[/\\]testInteg[/\\]java[/\\].*"/>
+    <suppress checks="ExecutableStatementCount" files="src[/\\]testInteg[/\\]java[/\\].*"/>
+    <suppress checks="MethodLength"             files="src[/\\]testInteg[/\\]java[/\\].*"/>
+</suppressions>

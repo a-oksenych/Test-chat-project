@@ -34,6 +34,6 @@ copyRestConfig.execute()
 */
 
 [jettyRun, jettyRunWar]*.with {
-	httpPort=new Integer(copyrightRoomPort)
-	contextPath=copyrightRoomPath
+	contextPath="${getProperty('rest.room.path')}"
+	httpPort=new Integer("${getProperty('rest.room.port')}")
 }
