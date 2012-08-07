@@ -4,6 +4,7 @@ import com.copyright.rup.chat.common.Room;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +34,7 @@ public class RoomResource {
             @RequestBody String serializedRoom) {
         try {
             Room room = objectMapper.readValue(serializedRoom, Room.class);
+            response.setStatus(HttpServletResponse.SC_CREATED);
             return roomService.createRoom(room);
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -40,10 +42,14 @@ public class RoomResource {
         return null;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Room getRoom(@PathVariable int id) {
-        return roomService.getRoom(id);
+    public Room getRoom(HttpServletRequest request, HttpServletResponse response, @PathVariable int id) {
+        Room room = roomService.getRoom(id);
+        if (room == null) {
+            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        }
+        return room;
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)

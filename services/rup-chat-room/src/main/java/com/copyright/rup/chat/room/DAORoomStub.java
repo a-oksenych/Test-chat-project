@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.copyright.rup.chat.common.Room;
+import com.copyright.rup.chat.room.RoomException.Type;
 
 /**
  * @author Oleksandr Dekhtyar
@@ -11,12 +12,12 @@ import com.copyright.rup.chat.common.Room;
  */
 public class DAORoomStub implements IDAORoom {
 
-    private int id = 0;
+    private int idx = 0;
     private Map<Integer, Room> rooms = new HashMap<Integer, Room>();
 
     @Override
     public Room createRoom(Room room) {
-        room.setId(++id);
+        room.setId(++idx);
         rooms.put(room.getId(), room);
         return room;
     }
@@ -28,6 +29,9 @@ public class DAORoomStub implements IDAORoom {
 
     @Override
     public Room updateRoom(Room room) {
+        if (!rooms.containsKey(room.getId())) {
+            throw new RoomException(Type.NOT_FOUND, "Room not found");
+        }
         rooms.put(room.getId(), room);
         return room;
     }
