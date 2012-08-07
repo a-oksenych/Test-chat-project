@@ -1,6 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'rup-java'
-
+	
 sourceCompatibility = 1.7
 
 buildscript {
@@ -55,6 +55,31 @@ task loadProperties {
     rootProject.getAdditionalProperties().putAll(userProps)
 }
 processResources.dependsOn loadProperties
+
+apply plugin: 'checkstyle'
+checkstyle {
+    checkstyleMain.configFile=new File("${project.projectDir}/config/checkstyle/checkstyle-strict.xml")
+    checkstyleMain.configProperties.put('suppressionsFile', "${project.projectDir}/config/checkstyle/suppressions.xml")
+}
+
+/*
+task configureCheckstyle {
+    //configFile=new File("${project.projectDir}/config/checkstyle/checkstyle-lenient.xml")
+    //configFile=new File("${project.projectDir}/config/checkstyle/checkstyle-strict.xml")
+    //configProperties.put('suppressionsFile', "${project.projectDir}/config/checkstyle/suppressions.xml")
+    println '------------------------'
+    println checkstyleMain
+    checkstyleMain.configFile=new File("${project.projectDir}/config/checkstyle/checkstyle-strict.xml")
+    checkstyleMain.configProperties.put('suppressionsFile', "${project.projectDir}/config/checkstyle/suppressions.xml")
+    //configFile=new File("${project.projectDir}/config/checkstyle/checkstyle-strict.xml")
+    //rootProject.getAdditionalProperties().put('configFile', new File("${project.projectDir}/config/checkstyle/checkstyle-strict.xml"))
+    //rootProject.getAdditionalProperties().put('suppressionsFile', "${project.projectDir}/config/checkstyle/suppressions.xml")
+}
+
+allprojects {
+    task checkstyleMain << {configureCheckstyle.execute()}
+}
+*/
 
 /*
 task loadWebProperties(type: Copy) {

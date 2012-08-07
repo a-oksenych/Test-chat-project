@@ -10,6 +10,9 @@ import org.codehaus.jackson.map.SerializationConfig;
  */
 public class CustomObjectMapper extends ObjectMapper {
 
+    /**
+     * {@inheritDoc}
+     */
     public CustomObjectMapper() {
         super();
         configure(SerializationConfig.Feature.WRAP_ROOT_VALUE, false);

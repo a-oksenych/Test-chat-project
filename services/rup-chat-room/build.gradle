@@ -21,6 +21,13 @@ test {
   exclude '**/*IT.class'
 }
 
+apply plugin: 'checkstyle'
+
+checkstyle {
+    checkstyleMain.configFile=new File("${project(':rup-chat-common').projectDir}/config/checkstyle/checkstyle-strict.xml")
+    checkstyleMain.configProperties.put('suppressionsFile', "${project(':rup-chat-common').projectDir}/config/checkstyle/suppressions.xml")
+}
+
 /*
 task copyRestConfig(type: Copy) {
     from "${project(':rup-chat-common').projectDir}/src/main/resources"
