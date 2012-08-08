@@ -4,6 +4,7 @@ import com.copyright.rup.chat.common.Account;
 import com.copyright.rup.chat.common.Room;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @author Andriy Oksenych
  * 
  */
+@Repository
 public class DaoAccount implements IDAOAccount {
 
     private Logger logger = Logger.getLogger(DaoAccount.class);
