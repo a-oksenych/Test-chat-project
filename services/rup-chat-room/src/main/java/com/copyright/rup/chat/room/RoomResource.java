@@ -23,10 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 public class RoomResource {
 
     @Autowired
-    private RoomService roomService;
+    protected RoomService roomService;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    protected ObjectMapper objectMapper;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
@@ -42,7 +42,7 @@ public class RoomResource {
         return null;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Room getRoom(HttpServletRequest request, HttpServletResponse response, @PathVariable int id) {
         Room room = roomService.getRoom(id);
@@ -66,7 +66,7 @@ public class RoomResource {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteRoom(@PathVariable int id) {
+    public void deleteRoom(HttpServletRequest request, HttpServletResponse response, @PathVariable int id) {
         roomService.deleteRoom(id);
     }
 }
