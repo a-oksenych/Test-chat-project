@@ -28,7 +28,7 @@ public class RoomResource {
     @Autowired
     protected ObjectMapper objectMapper;
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Room createRoom(HttpServletRequest request, HttpServletResponse response,
             @RequestBody String serializedRoom) {
@@ -52,13 +52,15 @@ public class RoomResource {
         return room;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Room updateRoom(HttpServletRequest request, HttpServletResponse response,
             @RequestBody String serializedRoom) {
         try {
             Room room = objectMapper.readValue(serializedRoom, Room.class);
             return roomService.updateRoom(room);
+        } catch (RoomException e) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
