@@ -16,8 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Oleksandr Dekhtyar
+ * The <code>Account</code> class represents a representation of account entity.
  * 
+ * @author Oleksandr Dekhtyar
  */
 @JsonAutoDetect(JsonMethod.NONE)
 @JsonTypeInfo(use = Id.CLASS)

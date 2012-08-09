@@ -1,9 +1,10 @@
 package com.copyright.rup.chat.account;
 
+import com.copyright.rup.chat.account.AccountException.Type;
+import com.copyright.rup.chat.common.Account;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import com.copyright.rup.chat.common.Account;
 
 /**
  * @author Oleksandr Dekhtyar
@@ -11,12 +12,12 @@ import com.copyright.rup.chat.common.Account;
  */
 public class DAOAccountStub implements IDAOAccount {
 
-    private int id = 0;
+    private int idx = 0;
     private Map<Integer, Account> accounts = new HashMap<Integer, Account>();
 
     @Override
     public Account createAccount(Account account) {
-        account.setId(++id);
+        account.setId(++idx);
         accounts.put(account.getId(), account);
         return account;
     }
@@ -28,6 +29,9 @@ public class DAOAccountStub implements IDAOAccount {
 
     @Override
     public Account updateAccount(Account account) {
+        if (!accounts.containsKey(account.getId())) {
+            throw new AccountException(Type.NOT_FOUND, "Account not found");
+        }
         accounts.put(account.getId(), account);
         return account;
     }

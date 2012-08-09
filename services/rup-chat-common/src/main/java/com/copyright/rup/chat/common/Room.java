@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * The <code>Room</code> class represents a representation of room entity.
+ * 
  * @author Oleksandr Dekhtyar
  * 
  */
@@ -26,12 +28,19 @@ public class Room implements Serializable {
 
     private static final long serialVersionUID = 5063347195226440297L;
 
+    /** The unique id of room. */
     @JsonProperty
     private int id;
+
+    /** The room name. */
     @JsonProperty
     private String name;
+
+    /** The room description. */
     @JsonProperty
     private String description;
+
+    /** Users of this room. */
     @JsonProperty
     private List<Account> users;
 
