@@ -10,7 +10,7 @@ public interface IDAOAccount {
 
     public Account createAccount(Account account);
 
-    public Account getAccount(int id);
+    public Account getAccountById(int id);
 
     public Account updateAccount(Account account);
 

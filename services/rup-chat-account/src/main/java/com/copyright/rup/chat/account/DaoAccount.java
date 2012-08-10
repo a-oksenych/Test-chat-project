@@ -21,8 +21,8 @@ public class DaoAccount implements IDAOAccount {
     @Override
     public Account createAccount(Account account) {
         try {
-            mapper.createAccountMyBatis(account);
-            account.setId(mapper.getInsertedId());
+            mapper.createAccount(account);
+            //account.setId(mapper.getInsertedId());
         } catch (Exception e) {
             logger.error("can't create an account" + e);
         }
@@ -31,10 +31,10 @@ public class DaoAccount implements IDAOAccount {
     }
 
     @Override
-    public Account getAccount(int idAccount) {
+    public Account getAccountById(int idAccount) {
         Account account = null;
         try {
-            account = mapper.getAccount(idAccount);
+            account = mapper.getAccountById(idAccount);
         } catch (Exception e) {
             logger.error("can't select an account" + e);
         }

@@ -23,7 +23,7 @@ public class DAOAccountStub implements IDAOAccount {
     }
 
     @Override
-    public Account getAccount(int idAccount) {
+    public Account getAccountById(int idAccount) {
         return accounts.get(idAccount);
     }
 

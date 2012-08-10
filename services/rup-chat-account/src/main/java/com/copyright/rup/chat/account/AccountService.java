@@ -20,7 +20,7 @@ public class AccountService {
     }
 
     public Account getAccount(int id) {
-        return daoAccount.getAccount(id);
+        return daoAccount.getAccountById(id);
     }
 
     public Account updateAccount(Account account) {

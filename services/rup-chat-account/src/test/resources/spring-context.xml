@@ -29,6 +29,15 @@
 	    </constructor-arg>
 	</bean>
 	
+	<bean id="daoAccount" class="com.copyright.rup.chat.account.DaoAccount" >
+	    <property name="mapper" ref="infoMapper" />
+	</bean>
+	
+	<bean id="infoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.copyright.rup.chat.account.IInfoMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+	
 	<bean id="userMapperFactory" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 	  <property name="basePackage" value="com.copyright.rup.chat.account" />
 	  <property name="sqlSessionFactory" ref="sqlSessionFactory" />

@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.copyright.rup.chat.account.DaoAccount;
+import com.copyright.rup.chat.common.Account;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring-context.xml" })
@@ -18,12 +19,13 @@ public class AccountDaoTest {
 
     @Test
     public void simpleTest() {
-        // System.out.println();
-        System.out.println(new File("changelog.groovy").exists());
-        System.out.println("WooF!");
-        // GroovyLiquibaseChangeLogParser parser = new GroovyLiquibaseChangeLogParser();
-        // System.out.println(parser.supports(
-        // "c:\\RUP\\workspaces\\Test-chat-project\\services\\rup-chat-db\\changelog.groovy", null));
-        // parser.parse(physicalChangeLogLocation, changeLogParameters, resourceAccessor);
+        Account account = new Account();
+        account.setName("Dexter");
+        account.setPassword("DexterASD");
+        account.setEmail("Dexter@com.fr");
+        accountDao.createAccount(account);
+        
+        Account resultAccount = accountDao.getAccountById(1); 
+        System.out.println(resultAccount);
     }
 }
